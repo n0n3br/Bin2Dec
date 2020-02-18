@@ -1,3 +1,3 @@
-# react-o5kgtt
+# Bin2Dev
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-o5kgtt)
+A simple app built using react and bulma that accepts a binary input of up to 8 digits and show the equivalent decimal value
