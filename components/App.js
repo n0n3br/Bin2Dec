@@ -1,41 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Snackbar from "./Snackbar";
+import Result from "./Result";
+import Form from "./Form";
 
 const App = () => {
-
-  const [bin, setBin]  = useState('')
-  const 
+  const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
 
   const handleKeyDown = event => {
-    const { keyCode } = event
-    if (![48,49,46,37,39].find(keyCode)) event.preventDefault()
-  }
+    const { keyCode, key } = event;
+    if (![8, 48, 49, 46, 37, 39, 96, 97].find(k => k === keyCode)) {
+      setError(`Invalid key ${key} pressed`);
+      event.preventDefault();
+      return;
+    }
+    setError("");
+  };
 
   const handleChange = event => {
-    setBin(event.target.value)
-  }
+    setValue(event.target.value);
+  };
 
   return (
-    <div className='hero is-primary is-fullheight'>
-      <div className='hero-body'>
-        <div className='container has-text-centered is-one-third-desktop'>
-        <div className='columns'>
-          <div className='column is-one-third-desktop is-offset-one-third-desktop'>
-            <div className='title'>Bin2Dec</div>
-            <div className='subtitle'>Enter the bin number to convert do decimal</div>
-            <form>
-              <div className='field'>
-                <div className='control'>
-                  <input className='input' value={bin} onChange={handleChange} onKeyDown={handleKeyDown} maxlength="8"/>
-                </div>
-              </div>
-            </form>
+    <div className="hero is-primary is-fullheight">
+      <div className="hero-body">
+        <div className="container has-text-centered is-one-third-desktop">
+          <div className="columns">
+            <div className="column is-one-third-desktop is-offset-one-third-desktop">
+              <div className="title">Bin2Dec</div>
+              <div className="subtitle">Enter the binary value</div>
+              <Form
+                value={value}
+                handleChange={handleChange}
+                handleKeyDown={handleKeyDown}
+              />
+              <Result value={value} />
+              <Snackbar
+                message={error}
+                type="danger"
+                handleClose={() => setError("")}
+              />
             </div>
-        </div>
+          </div>
         </div>
       </div>
-    </div> 
-  )
+    </div>
+  );
+};
 
-}
-
-export default App
+export default App;
