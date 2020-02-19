@@ -1,4 +1,4 @@
-# Bin2Dev
+# Bin2Dec
 
 A simple app built for learning purposes.
 
